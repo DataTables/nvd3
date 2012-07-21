@@ -3028,8 +3028,8 @@ nv.models.lineChart = function() {
       boundingRect = offsetElement.getBoundingClientRect();
     }
 
-    var left = e.pos[0] + boundingRect.top,
-        top = e.pos[1] + boundingRect.left,
+    var left = e.pos[0] + boundingRect.left,
+        top = e.pos[1] + boundingRect.top,
         x = xAxis.tickFormat()(lines.x()(e.point, e.pointIndex)),
         y = yAxis.tickFormat()(lines.y()(e.point, e.pointIndex)),
         content = tooltip(e.series.key, x, y, e, chart);
