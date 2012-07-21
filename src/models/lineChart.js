@@ -26,10 +26,10 @@ nv.models.lineChart = function() {
       xAxis = nv.models.axis().orient('bottom').tickPadding(5),
       yAxis = nv.models.axis().orient('left'),
       legend = nv.models.legend().height(30),
+      boundingRect = {top:0, left:0},
       dispatch = d3.dispatch('tooltipShow', 'tooltipHide');
 
   var showTooltip = function(e, offsetElement) {
-
     // New addition to calculate position if SVG is scaled with viewBox, may move
     if (offsetElement) {
       var svg = d3.select(offsetElement).select('svg');
@@ -40,10 +40,12 @@ nv.models.lineChart = function() {
         e.pos[0] = e.pos[0] * ratio;
         e.pos[1] = e.pos[1] * ratio;
       }
+
+      boundingRect = offsetElement.getBoundingClientRect();
     }
 
-    var left = e.pos[0] + ( offsetElement.offsetLeft || 0 ),
-        top = e.pos[1] + ( offsetElement.offsetTop || 0),
+    var left = e.pos[0] + boundingRect.top,
+        top = e.pos[1] + boundingRect.left,
         x = xAxis.tickFormat()(lines.x()(e.point, e.pointIndex)),
         y = yAxis.tickFormat()(lines.y()(e.point, e.pointIndex)),
         content = tooltip(e.series.key, x, y, e, chart);
