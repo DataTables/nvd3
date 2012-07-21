@@ -103,7 +103,7 @@ nv.models.axis = function() {
               .attr('transform', 'rotate(90)')
               .attr('y', -width + 12); //TODO: consider calculating this based on largest tick width... OR at least expose this on chart
           axisLabel
-              .attr('x', -scale.range()[0] / 2);
+              .attr('x', scale.range()[0] / 2);
           if (showMaxMin) {
             var axisMaxMin = wrap.selectAll('g.axisMaxMin')
                            .data(scale.domain());
