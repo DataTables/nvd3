@@ -26,10 +26,11 @@ nv.models.lineChart = function() {
       xAxis = nv.models.axis().orient('bottom').tickPadding(5),
       yAxis = nv.models.axis().orient('left'),
       legend = nv.models.legend().height(30),
-      boundingRect = {top:0, left:0},
       dispatch = d3.dispatch('tooltipShow', 'tooltipHide');
 
   var showTooltip = function(e, offsetElement) {
+    var boundingRect = {top:0, left:0};
+
     // New addition to calculate position if SVG is scaled with viewBox, may move
     if (offsetElement) {
       var svg = d3.select(offsetElement).select('svg');
