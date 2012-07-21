@@ -31,8 +31,9 @@ nv.models.linePlusBarChart = function() {
         x = xAxis.tickFormat()(lines.x()(e.point, e.pointIndex)),
         y = (e.series.bar ? yAxis1 : yAxis2).tickFormat()(lines.y()(e.point, e.pointIndex)),
         content = tooltip(e.series.key, x, y, e, chart);
+        boundingRect = offsetElement ? offsetElement.getBoundingClientRect() : {top:0, left:0};
 
-    nv.tooltip.show([left, top], content, e.value < 0 ? 'n' : 's');
+    nv.tooltip.show([left+boundingRect.left, top+boundingRect.top], content, e.value < 0 ? 'n' : 's');
   };
 
 
